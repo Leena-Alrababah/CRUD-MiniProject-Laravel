@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Return_;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+
+        // $products = DB::table('products')->get();
+        // dd($products);
+        
+        // return view('Products.index');
+
+        return view('Products.index', [
+            'products' => $products
+        ]);
+        // return view('Products.index', compact($products));
+
+        
+
     }
 
     /**
@@ -35,7 +50,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -44,9 +59,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show()
     {
-        //
+        $products = Product::all();
+
+        return view('Products.show', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -78,8 +97,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::destroy($id);
+
+        return redirect(route('Products.index'))->with('message', 'Product has been Deleted');
     }
 }
