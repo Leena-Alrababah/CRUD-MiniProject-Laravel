@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Return_;
 
-use App\Http\Controllers\DB;
 
 class ProductController extends Controller
 {

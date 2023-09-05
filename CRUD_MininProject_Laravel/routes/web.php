@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 
 Route::get('/Products.index', [ProductController::class, 'index'])->name('Products.index');
 

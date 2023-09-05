@@ -32,10 +32,10 @@
                         </li>
                     </ul>
             </div>
-            <form class="form-inline">
-                
-                
-                <a href="./create"><button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button></a>
+            <form class="form-inline" action="{{ route('create') }}">                
+                <a href="{{ route('create') }}">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button>
+                </a>
             </form>
         </nav><br><br><br>
         <div class="container">
