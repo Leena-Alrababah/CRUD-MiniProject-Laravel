@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Return_;
 
+use App\Http\Controllers\DB;
+
 class ProductController extends Controller
 {
     /**
@@ -20,6 +22,7 @@ class ProductController extends Controller
 
         // $products = DB::table('products')->get();
         // dd($products);
+
         
         // return view('Products.index');
 
@@ -27,6 +30,7 @@ class ProductController extends Controller
             'products' => $products
         ]);
         // return view('Products.index', compact($products));
+
 
         
 
@@ -50,6 +54,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $data = new Product();
+        $data->name = $request->input('productName');
+        $data->category_name= $request->input('productCategory');	 
+        $data->description = $request->input('productDesc');	 
+        $data->price= $request->input('productPrice');
+        $data->save();
+        return redirect('Products.index');
         
     }
 
@@ -74,9 +85,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        return view('Products.edit', [
+            'data' => Product::where('id', $id)->first()
+        ]);
+        // return view('Products.edit', ['data' => Product::findOrFail($id)]);
+        // return redirect ('edit',['data'=>Product::findOrFail($id)]);
     }
 
     /**
@@ -86,9 +101,16 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $data =Product::where('id', $id);
+        $data->name = $request->input('productName');
+        $data->category_name = $request->input('productCategory');
+        $data->description = $request->input('productDesc');
+        $data->price = $request->input('productPrice');
+
+        $data->update($request->except(['_token', '_method']));
+        return redirect('Products.index');
     }
 
     /**
