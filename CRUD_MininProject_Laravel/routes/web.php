@@ -1,8 +1,15 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
+Route::get('/Products.index', [ProductController::class, 'index'])->name('Products.index');
+
+Route::get('/Products.show', [ProductController::class, 'show'])->name('Products.show');
+
+//DELETE
+Route::delete('/Products/{id}', [ProductController::class, 'destroy'])->name('Products.destroy');
 
 Route::get('/', function () {
     return view('welcome');

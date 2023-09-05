@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Return_;
 
 use App\Http\Controllers\DB;
 
@@ -21,6 +23,7 @@ class ProductController extends Controller
         // $products = DB::table('products')->get();
         // dd($products);
 
+        
         // return view('Products.index');
 
         return view('Products.index', [
@@ -29,6 +32,7 @@ class ProductController extends Controller
         // return view('Products.index', compact($products));
 
 
+        
 
     }
 
@@ -57,6 +61,7 @@ class ProductController extends Controller
         $data->price= $request->input('productPrice');
         $data->save();
         return redirect('Products.index');
+        
     }
 
     /**

@@ -37,6 +37,8 @@
                 
                 
                 <a href="./create"><button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button></a>
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </nav>
         @if (session()->has('message'))
@@ -68,6 +70,7 @@
                 @foreach ($products as $product)
                     <tr>
                         <th scope="row">{{ $product->id }}</th>
+                        <th scope="row">1</th>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->description }}</td>
                         <td>{{ $product->price }}</td>
@@ -75,6 +78,7 @@
                         <td>
 
                             <a href="{{ route('Products.edit', $product->id) }}"><button type="button" class="btn btn-success">Edit</button></a>
+                            <button type="button" class="btn btn-success">Edit</button>
                             <div style="display: inline-block">
                                 <form action="{{ route('Products.destroy', $product->id) }}" method="POST">
                                     @csrf
