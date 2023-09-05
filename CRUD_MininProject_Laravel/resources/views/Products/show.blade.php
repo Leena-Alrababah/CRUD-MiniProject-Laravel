@@ -25,10 +25,10 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="#"></a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item ">
                             <a class="nav-link" href="{{ route('Products.index') }}">Dashboard</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="#">All Products  <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
@@ -43,7 +43,6 @@
         <div class="container">
             @foreach ($products as $product)
                 <div class="card d-inline-block" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">{{ $product->description }}</p>
@@ -54,6 +53,8 @@
                 </div>
             @endforeach
         </div>
+
+        
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
