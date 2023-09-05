@@ -73,9 +73,13 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->category_name }}</td>
                         <td>
+<<<<<<< HEAD
+                          <a href="{{ route('Products.destroy', $product->id) }}"><button type="button" class="btn btn-success">Edit</button></a>  
+=======
 
                             <a href="{{ route('Products.edit', $product->id) }}"></a>
                             <button type="button" class="btn btn-success">Edit</button>
+>>>>>>> 89b2fa534da4e772e4ae5d8da5d6a7b8afc40547
                             <div style="display: inline-block">
                                 <form action="{{ route('Products.destroy', $product->id) }}" method="POST">
                                     @csrf
