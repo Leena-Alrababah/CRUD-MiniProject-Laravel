@@ -73,7 +73,7 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->category_name }}</td>
                         <td>
-                            <button type="button" class="btn btn-success">Edit</button>
+                          <a href="{{ route('Products.destroy', $product->id) }}"><button type="button" class="btn btn-success">Edit</button></a>  
                             <div style="display: inline-block">
                                 <form action="{{ route('Products.destroy', $product->id) }}" method="POST">
                                     @csrf
