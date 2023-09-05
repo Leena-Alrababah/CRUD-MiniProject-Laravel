@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\DB;
+
 class ProductController extends Controller
 {
     /**
@@ -14,7 +16,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+
+        // $products = DB::table('products')->get();
+        // dd($products);
+
+        // return view('Products.index');
+
+        return view('Products.index', [
+            'products' => $products
+        ]);
+        // return view('Products.index', compact($products));
+
+
+
     }
 
     /**
@@ -35,7 +50,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Product();
+        $data->name = $request->input('productName');
+        $data->category_name= $request->input('productCategory');	 
+        $data->description = $request->input('productDesc');	 
+        $data->price= $request->input('productPrice');
+        $data->save();
+        return redirect('Products.index');
     }
 
     /**
@@ -44,9 +65,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show()
     {
-        //
+        $products = Product::all();
+
+        return view('Products.show', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -55,9 +80,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        return view('Products.edit', [
+            'data' => Product::where('id', $id)->first()
+        ]);
+        // return view('Products.edit', ['data' => Product::findOrFail($id)]);
+        // return redirect ('edit',['data'=>Product::findOrFail($id)]);
     }
 
     /**
@@ -67,9 +96,16 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $data =Product::where('id', $id);
+        $data->name = $request->input('productName');
+        $data->category_name = $request->input('productCategory');
+        $data->description = $request->input('productDesc');
+        $data->price = $request->input('productPrice');
+
+        $data->update($request->except(['_token', '_method']));
+        return redirect('Products.index');
     }
 
     /**
@@ -78,8 +114,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::destroy($id);
+
+        return redirect(route('Products.index'))->with('message', 'Product has been Deleted');
     }
 }

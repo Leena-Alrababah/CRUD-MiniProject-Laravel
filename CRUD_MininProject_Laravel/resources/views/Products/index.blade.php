@@ -12,6 +12,47 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+            <a class="navbar-brand " style="color: white">Welcome</a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('Products.index') }}">Dashboard <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Products.show') }}">All Products</a>
+                        </li>
+                    </ul>
+            </div>
+            <form class="form-inline">
+                
+                
+                <a href="./create"><button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button></a>
+            </form>
+        </nav>
+        @if (session()->has('message'))
+            <div>
+                <br>
+                <div style="color:white; background: red; font-weight: bold; padding: 10px">
+                    Warning
+                </div>
+                <div style="border: 1px solid red; padding: 8px; color: red; background: rgb(255, 210, 210);">
+                    {{ session()->get('message') }}
+                </div>
+            </div>
+
+        @endif
+        <br><br>
+
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -24,17 +65,28 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>
-                        <button type="button" class="btn btn-success">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
+                @foreach ($products as $product)
+                    <tr>
+                        <th scope="row">{{ $product->id }}</th>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->category_name }}</td>
+                        <td>
+
+                            <a href="{{ route('Products.edit', $product->id) }}"><button type="button" class="btn btn-success">Edit</button></a>
+                            <div style="display: inline-block">
+                                <form action="{{ route('Products.destroy', $product->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>                        
+                                </form>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>        
         <!-- Optional JavaScript -->

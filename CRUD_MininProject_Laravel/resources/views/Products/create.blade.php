@@ -11,8 +11,37 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+            <a class="navbar-brand " style="color: white">Welcome</a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('Products.index') }}">Dashboard <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Products.show') }}">All Products</a>
+                        </li>
+                    </ul>
+            </div>
+            <form class="form-inline">
+                
+                
+                <a href="./create"><button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button></a>
+            </form>
+        </nav><br><br><br>
         <div class="container">
-            <form>
+            <form action="create" method="post">
+                @csrf
+                @method('post')
                 <div class="form-group">
                     <label for="productName">Product Name</label>
                     <input type="text" class="form-control" id="productName" placeholder="Enter Product Name" name="productName">
@@ -23,14 +52,14 @@
                 </div>
                 <div class="form-group">
                     <label for="producrPrice">Product Price</label>
-                    <input type="text" class="form-control" id="producrPrice" placeholder="Enter Product Price" name="producrPrice">
+                    <input type="text" class="form-control" id="producrPrice" placeholder="Enter Product Price" name="productPrice">
                 </div>
                 <div class="form-group">
                     <label for="productCategory">Product Category</label>
                     <input type="text" class="form-control" id="productCategory" placeholder="Enter Product Category" name="productCategory">
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" name="submit" class="btn btn-primary">Add</button>
             </form>
 
         </div>
